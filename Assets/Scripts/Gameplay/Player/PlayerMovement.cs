@@ -20,7 +20,6 @@ public class PlayerMovement : MonoBehaviour {
     private bool _isPaused = true;
     private bool _isAlive = true;
     
-    
     private Vector2 _swipeStart;
     private Vector2 _swipeCurrent;
 
@@ -45,25 +44,29 @@ public class PlayerMovement : MonoBehaviour {
     
     private void Update() {
         
+        if(!_isAlive) { return; }
+        
         if(_isPaused) { return; }
         
-        transform.forward += transform.forward * (_movementSpeed * Time.deltaTime);
+        transform.position += transform.forward * (_movementSpeed * _movementSpeedFactor * Time.deltaTime);
 
         if(_swipeStart != _swipeCurrent) {
 
             var currentSwipeDistance = _swipeCurrent.x - _swipeStart.x;
-            Debug.Log($"Swipe distance: {currentSwipeDistance}");
+            // Debug.Log($"Swipe distance: {currentSwipeDistance}");
             
             if(Mathf.Abs(currentSwipeDistance) >= ScreenWidth * .25f) {
 
-                Debug.Log($"swipe identified");
+                // Debug.Log($"swipe identified");
                 
                 if(currentSwipeDistance > 0) {
 
                     if(playerPos.Equals(PlayerPos.LEFT)) {
 
                         //todo: go right
-                        player.transform.position = Vector3.right * moveAmount + Vector3.up;
+                        var localPos = player.transform.localPosition;
+                        localPos.x = moveAmount;
+                        player.transform.localPosition = localPos;
 
                         playerPos = PlayerPos.RIGHT;
                     }
@@ -71,9 +74,11 @@ public class PlayerMovement : MonoBehaviour {
                 else {
 
                     if(playerPos.Equals(PlayerPos.RIGHT)) {
-                        //todo: go left
                         
-                        player.transform.position = Vector3.right * -moveAmount + Vector3.up;
+                        //todo: go left
+                        var localPos = player.transform.localPosition;
+                        localPos.x = -moveAmount;
+                        player.transform.localPosition = localPos;
                         
                         playerPos = PlayerPos.LEFT;
                     }

@@ -29,13 +29,13 @@ public class InputHandler : MonoBehaviour {
         if(_attackAction.triggered) {
             
             _eventArchive.InvokeOnGetFirstClickPosition(_clickAction.ReadValue<Vector2>());
-            Debug.Log($"Initial Mouse Pos: {_clickAction.ReadValue<Vector2>()}");
+            // Debug.Log($"Initial Mouse Pos: {_clickAction.ReadValue<Vector2>()}");
         }
 
         if(_attackAction.IsPressed()) {
             
             _eventArchive.InvokeOnCurrentMousePosition(_clickAction.ReadValue<Vector2>());
-            Debug.Log($"Current Mouse Pos: {_clickAction.ReadValue<Vector2>()}");
+            // Debug.Log($"Current Mouse Pos: {_clickAction.ReadValue<Vector2>()}");
         }
         else {
             _eventArchive.InvokeOnCurrentMousePosition(Vector2.zero);
