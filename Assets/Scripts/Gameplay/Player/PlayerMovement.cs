@@ -63,8 +63,10 @@ public class PlayerMovement : MonoBehaviour {
 
                     if(playerPos.Equals(PlayerPos.LEFT)) {
 
-                        //todo: go right
+                        //todo: implement dotween
+                        
                         var localPos = player.transform.localPosition;
+                        // localPos.x = Mathf.Lerp(localPos.x, moveAmount, _movementSpeed * Time.deltaTime);
                         localPos.x = moveAmount;
                         player.transform.localPosition = localPos;
 
@@ -75,8 +77,9 @@ public class PlayerMovement : MonoBehaviour {
 
                     if(playerPos.Equals(PlayerPos.RIGHT)) {
                         
-                        //todo: go left
+                        //todo: implement dotween
                         var localPos = player.transform.localPosition;
+                        // localPos.x = Mathf.Lerp(localPos.x, -moveAmount, _movementSpeed * Time.deltaTime);
                         localPos.x = -moveAmount;
                         player.transform.localPosition = localPos;
                         

@@ -5,9 +5,11 @@ public class PlayerInfoHandler : MonoBehaviour {
 
     public MeshRenderer renderer;
     public int colorIndex;
+
+    private int _scorePower;
     
-    internal float health = 100f;
-    internal int currentScore = 2;
+    private float _health = 100f;
+    private int _currentScore = 2;
     
     
     
@@ -15,7 +17,7 @@ public class PlayerInfoHandler : MonoBehaviour {
         
         //todo: trigger ui point event
 
-        this.ObserveEveryValueChanged(_ => health).Where(_ => health > 0).Subscribe(_ => {
+        this.ObserveEveryValueChanged(_ => _health).Where(_ => _health > 0).Subscribe(_ => {
 
             //todo: trigger ui event
         });

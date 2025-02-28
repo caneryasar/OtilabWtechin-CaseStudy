@@ -5,13 +5,15 @@ using UnityEngine.Serialization;
 
 public class CarPropertyHandler : MonoBehaviour {
 
-    public MeshRenderer renderer;
+    public int carType;
+    public MeshRenderer carRenderer;
     public int colorIndex;
     public TextMeshProUGUI pointText;
+    internal int currentPointPower;
 
-    internal void Setup(int point, Material color) {
+    internal void Setup(int point, Color color) {
         
-        renderer.material = color;
+        carRenderer.materials[colorIndex].color = color;
         pointText.text = $"{point}";
     }
     
