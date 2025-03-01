@@ -1,21 +1,21 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour {
     
     private EventArchive _eventArchive;
     
     public GameObject player;
-    public MeshRenderer playerMeshRenderer;
 
-    public float moveAmount;
-    public float _movementSpeed;
+    public float horizontalMoveAmount;
+    public float fwdMovementSpeed;
     
     public enum PlayerPos { LEFT, RIGHT }
     public PlayerPos playerPos;
 
     private float _movementSpeedFactor = 1;
-    private float _movementResetCounter;
     
     private bool _isPaused = true;
     private bool _isAlive = true;
@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour {
         _eventArchive.OnChangeGameState += state => _isPaused = state;
         _eventArchive.OnGetFirstClickPosition += startPosition => _swipeStart = startPosition;
         _eventArchive.OnCurrentMousePosition += currentPosition => _swipeCurrent = currentPosition;
+        _eventArchive.OnGameEnd += () => _isAlive = false;
+        _eventArchive.OnPowerChange += power => _movementSpeedFactor = power * 3;
 
         playerPos = PlayerPos.RIGHT;
     }
@@ -48,45 +50,34 @@ public class PlayerMovement : MonoBehaviour {
         
         if(_isPaused) { return; }
         
-        transform.position += transform.forward * (_movementSpeed * _movementSpeedFactor * Time.deltaTime);
+        transform.position += transform.forward * ((fwdMovementSpeed + Mathf.Clamp(_movementSpeedFactor, 3, fwdMovementSpeed * 2f)) * Time.deltaTime);
 
-        if(_swipeStart != _swipeCurrent) {
+        if(_swipeStart == _swipeCurrent) { return; }
+        var currentSwipeDistance = _swipeCurrent.x - _swipeStart.x;
 
-            var currentSwipeDistance = _swipeCurrent.x - _swipeStart.x;
-            // Debug.Log($"Swipe distance: {currentSwipeDistance}");
+
+        if(!(Mathf.Abs(currentSwipeDistance) >= ScreenWidth * .2f)) { return; }
+        
+        if(currentSwipeDistance > 0) {
             
-            if(Mathf.Abs(currentSwipeDistance) >= ScreenWidth * .25f) {
+            if(!playerPos.Equals(PlayerPos.LEFT)) { return; }
+            
+            player.transform.DOLocalMove(Vector3.right * horizontalMoveAmount, .25f).SetEase(Ease.InOutSine);
+            player.transform.DOLocalRotate(Vector3.up * 30f, .15f)
+                .OnComplete(() => player.transform.DOLocalRotate(Vector3.zero, .1f));
 
-                // Debug.Log($"swipe identified");
-                
-                if(currentSwipeDistance > 0) {
-
-                    if(playerPos.Equals(PlayerPos.LEFT)) {
-
-                        //todo: implement dotween
+            playerPos = PlayerPos.RIGHT;
+        }
+        else {
+            
+            if(!playerPos.Equals(PlayerPos.RIGHT)) { return; }
+            
+            player.transform.DOLocalMove(Vector3.right * -horizontalMoveAmount, .25f).SetEase(Ease.InOutSine);
+            player.transform.DOLocalRotate(Vector3.up * -30f, .15f)
+                .OnComplete(() => player.transform.DOLocalRotate(Vector3.zero, .1f));
                         
-                        var localPos = player.transform.localPosition;
-                        // localPos.x = Mathf.Lerp(localPos.x, moveAmount, _movementSpeed * Time.deltaTime);
-                        localPos.x = moveAmount;
-                        player.transform.localPosition = localPos;
-
-                        playerPos = PlayerPos.RIGHT;
-                    }
-                }
-                else {
-
-                    if(playerPos.Equals(PlayerPos.RIGHT)) {
-                        
-                        //todo: implement dotween
-                        var localPos = player.transform.localPosition;
-                        // localPos.x = Mathf.Lerp(localPos.x, -moveAmount, _movementSpeed * Time.deltaTime);
-                        localPos.x = -moveAmount;
-                        player.transform.localPosition = localPos;
-                        
-                        playerPos = PlayerPos.LEFT;
-                    }
-                }
-            }
+            playerPos = PlayerPos.LEFT;
         }
     }
+    
 }

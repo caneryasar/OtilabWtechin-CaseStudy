@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2016608795336329349}
   m_Layer: 0
   m_Name: Car5
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CarPointCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7744837186468506297, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -110,11 +114,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -126,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.486
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -150,7 +154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.044
+      value: 2.297
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

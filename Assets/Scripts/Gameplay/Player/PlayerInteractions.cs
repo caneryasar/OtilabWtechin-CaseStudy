@@ -29,6 +29,9 @@ public class PlayerInteractions : MonoBehaviour {
             
             //todo: send event hit car with parameter car
             //get return value of the car point
+
+            // _eventArchive.InvokeOnHitCar(other.transform);
+            _eventArchive.InvokeOnCarHitCheck(other.transform);
         }
     }
 }

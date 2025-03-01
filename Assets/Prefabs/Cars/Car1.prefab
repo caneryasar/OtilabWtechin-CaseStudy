@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1447858361883462566}
   m_Layer: 0
   m_Name: Car1
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,9 +155,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 436278626903185904}
     m_Modifications:
+    - target: {fileID: 4126415534412398150, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
+      propertyPath: m_fontSize
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126415534412398150, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6258556817868615926, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_Name
       value: CarPointCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744837186468506297, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_Pivot.x
@@ -185,11 +197,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -201,7 +213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.085
+      value: -0.744
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -225,7 +237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.853
+      value: 2.339
       objectReference: {fileID: 0}
     - target: {fileID: 8461879334858938715, guid: ba7122dce583b0049a0e031c5428f2e3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

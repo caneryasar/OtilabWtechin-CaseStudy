@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class BlockPoolHandler : MonoBehaviour {
 
@@ -11,7 +10,7 @@ public class BlockPoolHandler : MonoBehaviour {
     public List<GameObject> cityBlocks;
     public List<GameObject> idlingCarPrefabs;
 
-    public float pushForwardAmount = 240f;
+    private float _pushForwardAmount;
 
     private int _currentIndex;
 
@@ -21,7 +20,6 @@ public class BlockPoolHandler : MonoBehaviour {
         _eventArchive = FindFirstObjectByType<EventArchive>();
 
         _eventArchive.OnCityBlockPassed += count => _currentIndex = count - 1;
-        // _eventArchive.OnCheckForAvailableCars += CheckForCars;
         _eventArchive.OnCheckForIdleCar += CheckIdleCar;
         _eventArchive.OnDespawnCars += GetIdlingCars;
 
@@ -44,13 +42,16 @@ public class BlockPoolHandler : MonoBehaviour {
             
             //todo: send selected city block as event make the cityBlock catch itself and despawn-respawn
             
+            var realIndex = targetIndex % cityBlocks.Count;
             
-            _eventArchive.InvokeOnSpawnCars(cityBlocks[targetIndex]);
+            _eventArchive.InvokeOnSpawnCars(cityBlocks[realIndex]);
             
-            var localPos = cityBlocks[targetIndex].transform.localPosition;
-            localPos.x += pushForwardAmount;
-            cityBlocks[targetIndex].transform.localPosition = localPos;
+            var localPos = cityBlocks[realIndex].transform.localPosition;
+            localPos.x += _pushForwardAmount;
+            cityBlocks[realIndex].transform.localPosition = localPos;
         });
+
+        _pushForwardAmount = 60 * cityBlocks.Count;
     }
 
     private Transform CheckIdleCar(int type) {
@@ -85,6 +86,7 @@ public class BlockPoolHandler : MonoBehaviour {
         car2.SetActive(false);
     }
 
+    /*
     private void CheckForCars(int type1, int type2) {
 
         Transform carOneTransform = null;
@@ -115,14 +117,5 @@ public class BlockPoolHandler : MonoBehaviour {
         
         _eventArchive.InvokeOnGetAvailableCars(carOneTransform, carTwoTransform);
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start() {
-        
-    }
-
-    // Update is called once per frame
-    private void Update() {
-        
-    }
+    */
 }
