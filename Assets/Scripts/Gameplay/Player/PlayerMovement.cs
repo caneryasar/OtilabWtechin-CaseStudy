@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour {
     private readonly float ScreenWidth = Screen.width;
 
 
-
     private void Awake() {
 
         _eventArchive = FindFirstObjectByType<EventArchive>();
@@ -38,11 +37,6 @@ public class PlayerMovement : MonoBehaviour {
 
         playerPos = PlayerPos.RIGHT;
     }
-
-    private void Start() {
-        
-    }
-
     
     private void Update() {
         
