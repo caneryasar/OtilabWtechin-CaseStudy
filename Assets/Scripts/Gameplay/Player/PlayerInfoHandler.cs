@@ -28,6 +28,8 @@ public class PlayerInfoHandler : MonoBehaviour {
         _eventArchive.OnGameStart += OpenCanvas;
 
         pointText.gameObject.SetActive(false);
+
+        _scorePower = (int)Mathf.Log(_currentScore, 2);
     }
 
     private void OpenCanvas() { pointText.gameObject.SetActive(true); }
@@ -57,8 +59,6 @@ public class PlayerInfoHandler : MonoBehaviour {
             _eventArchive.InvokeOnPlayerHealthChange(0);
             _eventArchive.InvokeOnChangeGameState(true);
             _eventArchive.InvokeOnGameEnd();
-            
-            PlayerPrefs.SetInt("PlayerScore", _currentScore);
             return;
         }
         
@@ -77,8 +77,6 @@ public class PlayerInfoHandler : MonoBehaviour {
         _eventArchive.InvokeOnPlayerHealthChange(0);
         _eventArchive.InvokeOnChangeGameState(true);
         _eventArchive.InvokeOnGameEnd();
-            
-        PlayerPrefs.SetInt("PlayerScore", _currentScore);
     }
 
     private void IncreasePoint() {
@@ -86,6 +84,7 @@ public class PlayerInfoHandler : MonoBehaviour {
         _scorePower++;
         
         _currentScore = (int)Mathf.Pow(2, _scorePower);
+        
         _eventArchive.InvokeOnPowerChange(_scorePower);
         
         GetSetVisuals();

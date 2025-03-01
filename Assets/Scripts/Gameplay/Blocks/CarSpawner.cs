@@ -32,7 +32,6 @@ public class CarSpawner : MonoBehaviour {
 
         _eventArchive = FindFirstObjectByType<EventArchive>();
 
-        _eventArchive.OnGetAvailableCars += GetIdleCars;
         _eventArchive.OnSpawnCars += CheckAndSpawn;
     }
 
@@ -52,64 +51,11 @@ public class CarSpawner : MonoBehaviour {
     }
 
 
-    private void GetIdleCars(Transform car1Transform, Transform car2Transform) {
-        
-        _requestedCarOneTransform = car1Transform;
-        _requestedCarTwoTransform = car2Transform;
-    }
-
-
     private void CheckAndSpawn(GameObject target) {
 
         if(target != _parent) { return; }
 
         StartCoroutine(CheckSpawnRoutine());
-            
-        /*
-        Despawn();
-            
-        _requestedCarOne = _eventArchive.InvokeOnGetCarInfo();
-        _requestedCarTwo = _eventArchive.InvokeOnGetCarInfo();
-        
-        _requestedCarOneTransform = _eventArchive.InvokeOnCheckForIdleCar(_requestedCarOne.carType);
-        _requestedCarTwoTransform = _eventArchive.InvokeOnCheckForIdleCar(_requestedCarTwo.carType);
-        GetSpawnPoints();
-            
-        var spawnPointOne = _spawnPoints[_spawnIndexOne];
-        var spawnPointTwo = _spawnPoints[_spawnIndexTwo];
-        
-        
-
-            
-        //todo respawn cars
-        DOVirtual.DelayedCall(.15f, () => {
-            
-            if(_requestedCarOneTransform) {
-                
-                _requestedCarOneTransform.gameObject.SetActive(true);
-                _requestedCarOneTransform.position = spawnPointOne.position;
-            }
-            else {
-                
-                var spawnedCarOne = Instantiate(_requestedCarOne, spawnPointOne.position, Quaternion.identity);
-                _requestedCarOneTransform = spawnedCarOne.transform;
-            }
-            
-            if(_requestedCarTwoTransform) {
-                
-                _requestedCarTwoTransform.gameObject.SetActive(true);
-                _requestedCarTwoTransform.position = spawnPointTwo.position;
-            }
-            else {
-                
-                var spawnedCarTwo = Instantiate(_requestedCarTwo, spawnPointTwo.position, Quaternion.identity);
-                _requestedCarTwoTransform = spawnedCarTwo.transform;
-            }
-            
-            _eventArchive.InvokeOnSetupSpawnedCar(_requestedCarOneTransform, CalculatePointToSpawn());
-            _eventArchive.InvokeOnSetupSpawnedCar(_requestedCarTwoTransform, CalculatePointToSpawn());
-        });
-        */
     }
 
     private IEnumerator CheckSpawnRoutine() {

@@ -5,10 +5,7 @@ public class EventArchive : MonoBehaviour {
     
     private MiscHelper _miscHelper;
 
-    private void Awake() {
-        
-        _miscHelper = new MiscHelper();
-    }
+    private void Awake() { _miscHelper = new MiscHelper(); }
 
     public event Action<Vector2> OnGetFirstClickPosition;
     public void InvokeOnGetFirstClickPosition(Vector2 pos) { OnGetFirstClickPosition?.Invoke(pos); }
@@ -39,9 +36,6 @@ public class EventArchive : MonoBehaviour {
 
     public event Func<int, Transform> OnCheckForIdleCar;
     public Transform InvokeOnCheckForIdleCar(int type) { return OnCheckForIdleCar?.Invoke(type); }
-    
-    public event Action<Transform, Transform> OnGetAvailableCars;
-    public void InvokeOnGetAvailableCars(Transform car1, Transform car2) { OnGetAvailableCars?.Invoke(car1, car2); }
 
     public event Func<int, Material> OnGetPowerColor;
     public Material InvokeOnGetPowerColor(int power) { return OnGetPowerColor?.Invoke(power); }
@@ -52,11 +46,7 @@ public class EventArchive : MonoBehaviour {
     public event Action<Transform, int> OnSetupSpawnedCar;
     public void InvokeOnSetupSpawnedCar(Transform car, int point) { OnSetupSpawnedCar?.Invoke(car, point); }
 
-    public event Action<Transform> OnHitCar;
-    public void InvokeOnHitCar(Transform car) { OnHitCar?.Invoke(car); }
     
-    public event Func<Transform, int> OnGetHitCarInfo;
-    public int? InvokeOnGetHitCarInfo(Transform car) { return OnGetHitCarInfo?.Invoke(car); }
     public event Action<Transform> OnCarHitCheck;
     public void InvokeOnCarHitCheck(Transform car) { OnCarHitCheck?.Invoke(car); }
     

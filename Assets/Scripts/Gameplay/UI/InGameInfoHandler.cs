@@ -18,7 +18,9 @@ public class InGameInfoHandler : MonoBehaviour {
     public GameObject infoPanel;
     public GameObject endPanel;
 
-    private int _topScore = 2;    
+    private int _topScore = 2;
+
+    private int _currentScore = 0;
     
     private void Awake() {
 
@@ -45,11 +47,19 @@ public class InGameInfoHandler : MonoBehaviour {
 
     private void UpdatePoint(int score) {
 
-        totalScoreText.text = $"CURRENT SCORE: {MiscHelper.FormatScore((int)_eventArchive.InvokeOnGetPlayerPoint())}\n\nTOP SCORE: {MiscHelper.FormatScore(PlayerPrefs.GetInt("PlayerScore"))}";
+        _currentScore = score;
+
+        totalScoreText.text = $"CURRENT SCORE: {MiscHelper.FormatScore(_currentScore)}\n\nTOP SCORE: {MiscHelper.FormatScore(_topScore)}";
         
-        if(score < _topScore) { return; }
+        if(_currentScore >= _topScore) { 
+            
+            _topScore = _currentScore;
+            var updateFormat = MiscHelper.FormatScore(_topScore);
+            scoreText.text = $"TOP SCORE : {updateFormat}";
+            
+            return;
+        }
         
-        _topScore = score;
         var newFormat = MiscHelper.FormatScore(_topScore);
         scoreText.text = $"TOP SCORE : {newFormat}";
     }
@@ -62,8 +72,10 @@ public class InGameInfoHandler : MonoBehaviour {
     }
 
     private void GameOverUI() {
-
-        endGameText.text = $"TOTAL SCORE: {MiscHelper.FormatScore(_topScore)}\n\nPLAY AGAIN?";
+        
+        PlayerPrefs.SetInt("PlayerScore", _topScore);
+        
+        endGameText.text = $"TOTAL SCORE: {MiscHelper.FormatScore(_currentScore)}\n\nTOP SCORE: {MiscHelper.FormatScore(_topScore)}\n\nPLAY AGAIN?";
         
         startPanel.SetActive(false);
         mainPanel.SetActive(false);

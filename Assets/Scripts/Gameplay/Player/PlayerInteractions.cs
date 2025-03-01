@@ -18,8 +18,6 @@ public class PlayerInteractions : MonoBehaviour {
 
         if(other.CompareTag("BlockShuffleTrigger")) {
             
-            // Debug.Log($"BlockShuffle trigger {other.name} hit");
-            
             passedBlocks++;
             
             _eventArchive.InvokeOnCityBlockPassed(passedBlocks);
@@ -27,10 +25,6 @@ public class PlayerInteractions : MonoBehaviour {
 
         if(other.CompareTag("Car")) {
             
-            //todo: send event hit car with parameter car
-            //get return value of the car point
-
-            // _eventArchive.InvokeOnHitCar(other.transform);
             _eventArchive.InvokeOnCarHitCheck(other.transform);
         }
     }
